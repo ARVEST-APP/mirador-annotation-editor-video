@@ -77,6 +77,11 @@ export const convertAnnotationStateToBeSaved = async (
       annotationStateForSaving.body.id = annotationStateForSaving.maeData.target.drawingState.shapes[0].url;
       annotationStateForSaving.type = 'Annotation';
     }
+    if (annotationStateForSaving.maeData.target.drawingState.shapes.length === 0) {
+      annotationStateForSaving.body.id = '';
+      annotationStateForSaving.body.format = 'image/jpg';
+      annotationStateForSaving.type = 'Annotation';
+    }
   }
 
   annotationStateForSaving.maeData.target.scale = playerReferences.getMediaTrueHeight()
