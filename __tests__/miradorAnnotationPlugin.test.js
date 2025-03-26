@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { MiradorMenuButton } from 'mirador/dist/es/src/components/MiradorMenuButton';
-import LocalStorageAdapter from '../src/LocalStorageAdapter';
+import LocalStorageAdapter from '../src/annotationAdapter/LocalStorageAdapter';
 import miradorAnnotationPlugin from '../src/plugins/miradorAnnotationPlugin';
 
 /** */
@@ -25,7 +25,9 @@ describe('MiradorAnnotation', () => {
   let wrapper;
   it('renders a create new button', () => {
     wrapper = createWrapper();
-    expect(wrapper.find(MiradorMenuButton).props()['aria-label']).toBe('Create new annotation');
+    expect(wrapper.find(MiradorMenuButton)
+      .props()['aria-label'])
+      .toBe('Create new annotation');
   });
   it('opens a new companionWindow when clicked', () => {
     const mockAddCompanionWindow = jest.fn();
@@ -34,35 +36,45 @@ describe('MiradorAnnotation', () => {
       addCompanionWindow: mockAddCompanionWindow,
       receiveAnnotation: receiveAnnotationMock,
     });
-    wrapper.find(MiradorMenuButton).simulate('click');
-    expect(mockAddCompanionWindow).toHaveBeenCalledWith(
-      'annotationCreation',
-      {
-        position: 'right',
-      },
-    );
+    wrapper.find(MiradorMenuButton)
+      .simulate('click');
+    expect(mockAddCompanionWindow)
+      .toHaveBeenCalledWith(
+        'annotationCreation',
+        {
+          position: 'right',
+        },
+      );
   });
   it('opens single canvas view dialog if not in single view', () => {
     wrapper = createWrapper({
       windowViewType: 'book',
     });
-    expect(wrapper.instance().state.singleCanvasDialogOpen).toBe(false);
-    wrapper.find(MiradorMenuButton).simulate('click');
-    expect(wrapper.instance().state.singleCanvasDialogOpen).toBe(true);
+    expect(wrapper.instance().state.singleCanvasDialogOpen)
+      .toBe(false);
+    wrapper.find(MiradorMenuButton)
+      .simulate('click');
+    expect(wrapper.instance().state.singleCanvasDialogOpen)
+      .toBe(true);
   });
   it('renders no export button if export or LocalStorageAdapter are not configured', () => {
     wrapper = createWrapper();
-    expect(wrapper.find(MiradorMenuButton).some({ 'aria-label': 'Export local annotations for visible items' })).toBe(false);
+    expect(wrapper.find(MiradorMenuButton)
+      .some({ 'aria-label': 'Export local annotations for visible items' }))
+      .toBe(false);
 
     wrapper = createWrapper({
       config: {
         annotation: {
-          adapter: () => () => {},
+          adapter: () => () => {
+          },
           exportLocalStorageAnnotations: true,
         },
       },
     });
-    expect(wrapper.find(MiradorMenuButton).some({ 'aria-label': 'Export local annotations for visible items' })).toBe(false);
+    expect(wrapper.find(MiradorMenuButton)
+      .some({ 'aria-label': 'Export local annotations for visible items' }))
+      .toBe(false);
 
     wrapper = createWrapper({
       config: {
@@ -71,7 +83,9 @@ describe('MiradorAnnotation', () => {
         },
       },
     });
-    expect(wrapper.find(MiradorMenuButton).some({ 'aria-label': 'Export local annotations for visible items' })).toBe(false);
+    expect(wrapper.find(MiradorMenuButton)
+      .some({ 'aria-label': 'Export local annotations for visible items' }))
+      .toBe(false);
   });
   it('renders export button if export and LocalStorageAdapter are configured', () => {
     wrapper = createWrapper({
@@ -82,6 +96,8 @@ describe('MiradorAnnotation', () => {
         },
       },
     });
-    expect(wrapper.find(MiradorMenuButton).some({ 'aria-label': 'Export local annotations for visible items' })).toBe(true);
+    expect(wrapper.find(MiradorMenuButton)
+      .some({ 'aria-label': 'Export local annotations for visible items' }))
+      .toBe(true);
   });
 });

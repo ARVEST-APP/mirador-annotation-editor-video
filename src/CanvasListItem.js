@@ -14,7 +14,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import AnnotationActionsContext from './AnnotationActionsContext';
 import WhoAndWhenFormSection, { TOOLTIP_MODE } from './annotationForm/WhoAndWhenFormSection';
 
-// TODO missing TRAD
 const CanvasListItem = forwardRef((props, ref) => {
   const [isHovering, setIsHovering] = useState(false);
   const context = useContext(AnnotationActionsContext);
@@ -36,6 +35,7 @@ const CanvasListItem = forwardRef((props, ref) => {
                 return annotation;
               }
             }
+            return null;
           });
       }
       return (annotation);
