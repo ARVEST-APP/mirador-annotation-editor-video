@@ -53,20 +53,20 @@ export const TEMPLATE_TYPES = (t) => [
     icon: <TextFieldsIcon />,
     id: TEMPLATE.TEXT_TYPE,
     isCompatibleWithTemplate: (mediaType) => {
-      if (mediaType === MEDIA_TYPES.VIDEO) return false;
-      if (mediaType === MEDIA_TYPES.IMAGE) return false;
+      if (mediaType === MEDIA_TYPES.VIDEO) return true;
+      if (mediaType === MEDIA_TYPES.IMAGE) return true;
       if (mediaType === MEDIA_TYPES.AUDIO) return false;
       return false;
     },
-    label: t('note'),
+    label: t('Old Note'),
   },
   {
     description: t('tag_with_target'),
     icon: <LocalOfferIcon fontSize="small" />,
     id: TEMPLATE.TAGGING_TYPE,
     isCompatibleWithTemplate: (mediaType) => {
-      if (mediaType === MEDIA_TYPES.VIDEO) return false;
-      if (mediaType === MEDIA_TYPES.IMAGE) return false;
+      if (mediaType === MEDIA_TYPES.VIDEO) return true;
+      if (mediaType === MEDIA_TYPES.IMAGE) return true;
       if (mediaType === MEDIA_TYPES.AUDIO) return false;
       return false;
     },
