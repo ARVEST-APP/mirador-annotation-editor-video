@@ -12,6 +12,7 @@ import TaggingTemplate from './TaggingTemplate';
 
 import './debug.css';
 import MultipleBodyTemplate from './MultipleBodyTemplate';
+import TextCommentTemplate from './TextCommentTemplate';
 
 /**
  * This function contain the logic for loading annotation and render proper template type
@@ -44,6 +45,15 @@ export default function AnnotationFormBody(
               t={t}
             />
           ) : templateType.id === TEMPLATE.TEXT_TYPE ? (
+            <TextCommentTemplate
+              annotation={annotation}
+              closeFormCompanionWindow={closeFormCompanionWindow}
+              playerReferences={playerReferences}
+              saveAnnotation={saveAnnotation}
+              t={t}
+              windowId={windowId}
+            />
+          ) : templateType.id === TEMPLATE.KONVA_TYPE ? (
             <DrawingTemplate
               annotation={annotation}
               closeFormCompanionWindow={closeFormCompanionWindow}
@@ -52,58 +62,48 @@ export default function AnnotationFormBody(
               t={t}
               windowId={windowId}
             />
+          ) : templateType.id === TEMPLATE.MANIFEST_TYPE ? (
+            <NetworkCommentTemplate
+              annotation={annotation}
+              closeFormCompanionWindow={closeFormCompanionWindow}
+              playerReferences={playerReferences}
+              saveAnnotation={saveAnnotation}
+              t={t}
+              windowId={windowId}
+              commentTemplate={config?.annotation?.commentTemplates ?? []}
+              tagsSuggestions={config?.annotation?.tagsSuggestions ?? []}
+            />
+          ) : templateType.id === TEMPLATE.TAGGING_TYPE ? (
+            <TaggingTemplate
+              annotation={annotation}
+              closeFormCompanionWindow={closeFormCompanionWindow}
+              playerReferences={playerReferences}
+              saveAnnotation={saveAnnotation}
+              t={t}
+              windowId={windowId}
+            />
+          ) : templateType.id === TEMPLATE.MULTIPLE_BODY_TYPE ? (
+            <MultipleBodyTemplate
+              annotation={annotation}
+              closeFormCompanionWindow={closeFormCompanionWindow}
+              playerReferences={playerReferences}
+              saveAnnotation={saveAnnotation}
+              t={t}
+              windowId={windowId}
+              commentTemplate={config?.annotation?.commentTemplates ?? []}
+              tagsSuggestions={config?.annotation?.tagsSuggestions ?? []}
+            />
+          ) : (
+            // Fallback to IIIFTemplate
+            <IIIFTemplate
+              annotation={annotation}
+              canvases={canvases}
+              closeFormCompanionWindow={closeFormCompanionWindow}
+              playerReferences={playerReferences}
+              saveAnnotation={saveAnnotation}
+              t={t}
+            />
           )
-            : templateType.id === TEMPLATE.KONVA_TYPE ? (
-              <DrawingTemplate
-                annotation={annotation}
-                closeFormCompanionWindow={closeFormCompanionWindow}
-                playerReferences={playerReferences}
-                saveAnnotation={saveAnnotation}
-                t={t}
-                windowId={windowId}
-              />
-            ) : templateType.id === TEMPLATE.MANIFEST_TYPE ? (
-              <NetworkCommentTemplate
-                annotation={annotation}
-                closeFormCompanionWindow={closeFormCompanionWindow}
-                playerReferences={playerReferences}
-                saveAnnotation={saveAnnotation}
-                t={t}
-                windowId={windowId}
-                commentTemplate={config?.annotation?.commentTemplates ?? []}
-                tagsSuggestions={config?.annotation?.tagsSuggestions ?? []}
-              />
-            ) : templateType.id === TEMPLATE.TAGGING_TYPE ? (
-              <TaggingTemplate
-                annotation={annotation}
-                closeFormCompanionWindow={closeFormCompanionWindow}
-                playerReferences={playerReferences}
-                saveAnnotation={saveAnnotation}
-                t={t}
-                windowId={windowId}
-              />
-            ) : templateType.id === TEMPLATE.MULTIPLE_BODY_TYPE ? (
-              <MultipleBodyTemplate
-                annotation={annotation}
-                closeFormCompanionWindow={closeFormCompanionWindow}
-                playerReferences={playerReferences}
-                saveAnnotation={saveAnnotation}
-                t={t}
-                windowId={windowId}
-                commentTemplate={config?.annotation?.commentTemplates ?? []}
-                tagsSuggestions={config?.annotation?.tagsSuggestions ?? []}
-              />
-            ) : (
-              // Fallback to IIIFTemplate
-              <IIIFTemplate
-                annotation={annotation}
-                canvases={canvases}
-                closeFormCompanionWindow={closeFormCompanionWindow}
-                playerReferences={playerReferences}
-                saveAnnotation={saveAnnotation}
-                t={t}
-              />
-            )
         }
 
       </TemplateContainer>
