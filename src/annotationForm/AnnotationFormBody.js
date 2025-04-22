@@ -79,6 +79,8 @@ export default function AnnotationFormBody(
               saveAnnotation={saveAnnotation}
               t={t}
               windowId={windowId}
+              commentTemplate={config?.annotation?.commentTemplates ?? []}
+              tagsSuggestions={config?.annotation?.tagsSuggestions ?? []}
             />
           )
         }
