@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import React from 'react';
+import { Grid } from '@mui/material';
 import { ANONYMOUS_USER } from '../annotationAdapter/LocalStorageAdapter';
 
 export const TOOLTIP_MODE = 'tooltip';
@@ -36,9 +37,11 @@ function WhoAndWhenFormSection({
     <>
       {
         displayMode === SECTION_MODE && (
-          <Typography variant="formSectionTitle">
-            {t('metadata')}
-          </Typography>
+          <Grid container item>
+            <Typography variant="formSectionTitle">
+              {t('metadata')}
+            </Typography>
+          </Grid>
         )
       }
       {

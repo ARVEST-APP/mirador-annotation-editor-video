@@ -40,7 +40,8 @@ export const convertAnnotationStateToBeSaved = async (
 ) => {
   const annotationStateForSaving = annotationState;
 
-  if (annotationState.maeData.templateType === TEMPLATE.IIIF_TYPE) {
+  if (!annotationState.maeData.templateType
+    || annotationStateForSaving.maeData.templateType === TEMPLATE.IIIF_TYPE) {
     return annotationState;
   }
   console.info('Annotation state to be saved', annotationState);
@@ -67,7 +68,8 @@ export const convertAnnotationStateToBeSaved = async (
     }
   }
 
-  if (annotationStateForSaving.maeData.templateType === TEMPLATE.MULTIPLE_BODY_TYPE) {
+  if (annotationStateForSaving.maeData.templateType === TEMPLATE.MULTIPLE_BODY_TYPE
+    || annotationStateForSaving.maeData.templateType === TEMPLATE.MANIFEST_TYPE) {
     annotationStateForSaving.body = [annotationState.maeData.textBody];
     annotationStateForSaving.body.push(...annotationState.maeData.tags.map((tag) => ({
       purpose: 'tagging',
