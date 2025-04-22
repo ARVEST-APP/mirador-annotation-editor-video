@@ -40,7 +40,8 @@ export const convertAnnotationStateToBeSaved = async (
 ) => {
   const annotationStateForSaving = annotationState;
 
-  if (annotationState.maeData.templateType === TEMPLATE.IIIF_TYPE) {
+  if (!annotationState.maeData.templateType
+    || annotationStateForSaving.maeData.templateType === TEMPLATE.IIIF_TYPE) {
     return annotationState;
   }
   console.info('Annotation state to be saved', annotationState);
