@@ -139,7 +139,7 @@ function AnnotationFormOverlayToolOptions({
   return (
     <div>
       {
-        ((displayMode === KONVA_MODE.DRAW || displayMode === KONVA_MODE.TARGET)
+        ((displayMode === KONVA_MODE.DRAW)
           && isShapesTool(toolState.activeTool)) && (
           <Grid container>
             <ColorPicker
