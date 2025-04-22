@@ -67,7 +67,8 @@ export const convertAnnotationStateToBeSaved = async (
     }
   }
 
-  if (annotationStateForSaving.maeData.templateType === TEMPLATE.MULTIPLE_BODY_TYPE) {
+  if (annotationStateForSaving.maeData.templateType === TEMPLATE.MULTIPLE_BODY_TYPE
+    || annotationStateForSaving.maeData.templateType === TEMPLATE.MANIFEST_TYPE) {
     annotationStateForSaving.body = [annotationState.maeData.textBody];
     annotationStateForSaving.body.push(...annotationState.maeData.tags.map((tag) => ({
       purpose: 'tagging',

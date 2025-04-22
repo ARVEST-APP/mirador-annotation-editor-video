@@ -67,7 +67,7 @@ function NetworkCommentTemplate(
       maeAnnotation.maeData.textBody = {
         purpose: 'describing',
         type: 'TextualBody',
-        value: '',
+        value: maeAnnotation.body.value,
       };
       maeAnnotation.maeData.tags = [];
     }
